@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-18T13:57:19.631Z",
+  "generatedAt": "2026-11-18T13:58:19.538Z",
   "collections": [
     {
       "name": "users",
@@ -29,19 +29,922 @@
           "type": "autodate",
           "required": false,
           "system": false,
-          "autodateTriggers": ["onCreate"]
+          "autodateTriggers": [
+            "onCreate"
+          ]
         },
         {
           "name": "updated",
           "type": "autodate",
           "required": false,
           "system": false,
-          "autodateTriggers": ["onCreate", "onUpdate"]
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        },
+        {
+          "name": "role",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "admin",
+            "atendente"
+          ]
         }
       ],
       "indexes": [
         "CREATE UNIQUE INDEX `idx_tokenKey__pb_users_auth_` ON `users` (`tokenKey`)",
         "CREATE UNIQUE INDEX `idx_email__pb_users_auth_` ON `users` (`email`) WHERE `email` != ''"
+      ]
+    },
+    {
+      "name": "conversas",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "update": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "delete": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')"
+      },
+      "fields": [
+        {
+          "name": "cliente_nome",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "cliente_usuario",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "situacao",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "nova",
+            "em_atendimento",
+            "aguardando_cliente",
+            "resolvida"
+          ]
+        },
+        {
+          "name": "atendente_responsavel",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "ultima_mensagem_data",
+          "type": "date",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "nao_lidas",
+          "type": "number",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        },
+        {
+          "name": "cliente_ig_id",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "cliente_id",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "clientes"
+        },
+        {
+          "name": "rascunho_texto",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "rascunho_situacao",
+          "type": "select",
+          "required": false,
+          "system": false,
+          "selectValues": [
+            "nenhum",
+            "sugestao",
+            "editado",
+            "pronto_para_envio"
+          ]
+        },
+        {
+          "name": "ultimo_resumo_texto",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "ultimo_resumo_data",
+          "type": "date",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "ultimo_resumo_autor",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "ultima_sugestao_data",
+          "type": "date",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "ultima_sugestao_autor",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "users"
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_conversas_cliente_usuario ON conversas (cliente_usuario)",
+        "CREATE INDEX idx_conversas_situacao ON conversas (situacao)",
+        "CREATE INDEX idx_conversas_atendente ON conversas (atendente_responsavel)",
+        "CREATE INDEX idx_conversas_ultima_mensagem ON conversas (ultima_mensagem_data DESC)",
+        "CREATE INDEX `idx_conversas_cliente_ig_id` ON `conversas` (cliente_ig_id)"
+      ]
+    },
+    {
+      "name": "mensagens",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "update": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "delete": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')"
+      },
+      "fields": [
+        {
+          "name": "conversa_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "conversas"
+        },
+        {
+          "name": "remetente",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "cliente",
+            "central"
+          ]
+        },
+        {
+          "name": "texto",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "data_hora",
+          "type": "date",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "situacao",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "recebida",
+            "enviada",
+            "erro"
+          ]
+        },
+        {
+          "name": "atendente_id",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        },
+        {
+          "name": "identificador_externo",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "motivo_erro",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "id_idempotencia",
+          "type": "text",
+          "required": false,
+          "system": false
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_mensagens_conversa ON mensagens (conversa_id)",
+        "CREATE INDEX idx_mensagens_data_hora ON mensagens (data_hora)",
+        "CREATE INDEX idx_mensagens_situacao ON mensagens (situacao)",
+        "CREATE INDEX `idx_mensagens_identificador_externo` ON `mensagens` (identificador_externo)",
+        "CREATE INDEX `idx_mensagens_idempotencia` ON `mensagens` (id_idempotencia)"
+      ]
+    },
+    {
+      "name": "mudancas_situacao",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "update": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "delete": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')"
+      },
+      "fields": [
+        {
+          "name": "conversa_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "conversas"
+        },
+        {
+          "name": "situacao_anterior",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "nova",
+            "em_atendimento",
+            "aguardando_cliente",
+            "resolvida"
+          ]
+        },
+        {
+          "name": "situacao_nova",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "nova",
+            "em_atendimento",
+            "aguardando_cliente",
+            "resolvida"
+          ]
+        },
+        {
+          "name": "usuario_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "data",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_mudancas_conversa ON mudancas_situacao (conversa_id)",
+        "CREATE INDEX idx_mudancas_usuario ON mudancas_situacao (usuario_id)"
+      ]
+    },
+    {
+      "name": "conexao_meta",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "update": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "delete": "@request.auth.id != '' && @request.auth.role = 'admin'"
+      },
+      "fields": [
+        {
+          "name": "app_nome",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "app_id",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "app_secret",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "verify_token",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "url_login",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "situacao",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "desconectada",
+            "conectada",
+            "reconectar"
+          ]
+        },
+        {
+          "name": "conta_usuario",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "conta_nome",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "conta_id",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "data_conexao",
+          "type": "date",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "access_token",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "token_expira_em",
+          "type": "date",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        },
+        {
+          "name": "app_situacao",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "em teste",
+            "em revisão",
+            "publicado"
+          ]
+        },
+        {
+          "name": "data_mudanca_situacao",
+          "type": "date",
+          "required": false,
+          "system": false
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_conexao_situacao ON conexao_meta (situacao)"
+      ]
+    },
+    {
+      "name": "historico_conexao",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "view": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "create": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "update": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "delete": "@request.auth.id != '' && @request.auth.role = 'admin'"
+      },
+      "fields": [
+        {
+          "name": "usuario_id",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "autor_nome",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "acao",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "detalhes",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "data",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_historico_created ON historico_conexao (created DESC)"
+      ]
+    },
+    {
+      "name": "avisos_webhook",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "view": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "create": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "update": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "delete": "@request.auth.id != '' && @request.auth.role = 'admin'"
+      },
+      "fields": [
+        {
+          "name": "identificador_evento",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "tipo_evento",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "mensagem",
+            "eco",
+            "status",
+            "outro"
+          ]
+        },
+        {
+          "name": "situacao",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "aceito",
+            "rejeitado",
+            "eco"
+          ]
+        },
+        {
+          "name": "motivo_rejeicao",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "remetente_id",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "destinatario_id",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "texto_mensagem",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "payload",
+          "type": "json",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "data_recebimento",
+          "type": "date",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "conversa_id",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "conversas"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE UNIQUE INDEX idx_avisos_identificador ON avisos_webhook (identificador_evento)",
+        "CREATE INDEX idx_avisos_situacao ON avisos_webhook (situacao)",
+        "CREATE INDEX idx_avisos_data ON avisos_webhook (data_recebimento DESC)"
+      ]
+    },
+    {
+      "name": "clientes",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "update": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "delete": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')"
+      },
+      "fields": [
+        {
+          "name": "ig_id",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "nome",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "usuario",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "primeira_interacao",
+          "type": "date",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE UNIQUE INDEX idx_clientes_ig_id ON clientes (ig_id)",
+        "CREATE INDEX idx_clientes_usuario ON clientes (usuario)",
+        "CREATE INDEX idx_clientes_primeira_interacao ON clientes (primeira_interacao)"
+      ]
+    },
+    {
+      "name": "notas_internas",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "update": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "delete": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')"
+      },
+      "fields": [
+        {
+          "name": "cliente_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "clientes"
+        },
+        {
+          "name": "texto",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "autor_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "data",
+          "type": "date",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_notas_cliente ON notas_internas (cliente_id)",
+        "CREATE INDEX idx_notas_autor ON notas_internas (autor_id)",
+        "CREATE INDEX idx_notas_data ON notas_internas (data DESC)"
+      ]
+    },
+    {
+      "name": "configuracoes_ia",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "update": "@request.auth.id != '' && @request.auth.role = 'admin'",
+        "delete": "@request.auth.id != '' && @request.auth.role = 'admin'"
+      },
+      "fields": [
+        {
+          "name": "tom_de_voz",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "instrucoes_fixas",
+          "type": "text",
+          "required": false,
+          "system": false
+        },
+        {
+          "name": "atualizado_por",
+          "type": "relation",
+          "required": false,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "copiloto_registros",
+      "type": "base",
+      "apiRules": {
+        "list": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "view": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "create": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "update": "@request.auth.id != '' && (@request.auth.role = 'admin' || @request.auth.role = 'atendente')",
+        "delete": "@request.auth.id != '' && @request.auth.role = 'admin'"
+      },
+      "fields": [
+        {
+          "name": "conversa_id",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "conversas"
+        },
+        {
+          "name": "tipo",
+          "type": "select",
+          "required": true,
+          "system": false,
+          "selectValues": [
+            "resumo",
+            "sugestao"
+          ]
+        },
+        {
+          "name": "conteudo",
+          "type": "text",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "solicitado_por",
+          "type": "relation",
+          "required": true,
+          "system": false,
+          "collectionRef": "users"
+        },
+        {
+          "name": "data",
+          "type": "date",
+          "required": true,
+          "system": false
+        },
+        {
+          "name": "created",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate"
+          ]
+        },
+        {
+          "name": "updated",
+          "type": "autodate",
+          "required": false,
+          "system": false,
+          "autodateTriggers": [
+            "onCreate",
+            "onUpdate"
+          ]
+        }
+      ],
+      "indexes": [
+        "CREATE INDEX idx_copiloto_conversa ON copiloto_registros (conversa_id)",
+        "CREATE INDEX idx_copiloto_tipo ON copiloto_registros (tipo)",
+        "CREATE INDEX idx_copiloto_data ON copiloto_registros (data DESC)"
       ]
     }
   ]
