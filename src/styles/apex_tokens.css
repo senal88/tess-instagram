@@ -1,40 +1,163 @@
-/* Tokens Apex (espelho compacto) — mesma paleta do padrão Tess. */
+/**
+ * GERADO — não editar. Espelho (somente tokens) da SSOT de design Apex.
+ * apex-tokens-source: glob_00_smarthub/tools/18_frontend_ui_ux/tokens/apex_design_tokens.css sha256: 67f3b5f0250ba27ad7710988caed626dddced81ca7989c15776f22d1689a1413
+ * Base e utilitários .apex-* ficam na SSOT; tema via data-apex-theme.
+ * Regerar: make tokens-mirror APPLY=1 · Gate: make ux-gate
+ */
+
 :root,
 [data-apex-theme='apex-light'] {
   --apex-bg: #f8fafc;
   --apex-bg-2: #ffffff;
+  --apex-elev: #f8fafc;
   --apex-panel: #ffffff;
   --apex-card: #ffffff;
   --apex-sidebar: #f1f5f9;
+  --apex-editor: #f1f5f9;
   --apex-text: #0f172a;
   --apex-text-strong: #00205b;
   --apex-muted: #475569;
   --apex-faint: #64748b;
   --apex-border: #e2e8f0;
   --apex-border-strong: #cbd5e1;
+  --apex-border-soft: #eef2f7;
   --apex-accent: #00205b;
   --apex-on-accent: #ffffff;
   --apex-accent-2: #0052cc;
   --apex-accent-soft: #eef4ff;
   --apex-accent-ring: rgba(0, 82, 204, 0.35);
+  --apex-cyan: #0e7490;
   --apex-green: #15803d;
   --apex-amber: #92400e;
   --apex-red: #b91c1c;
-  --apex-cyan: #0e7490;
+  --apex-pink: #6d28d9;
   --apex-gold: #c5a059;
+  --apex-gold-soft: #faf5ea;
+  --apex-live-bg: #dcfce7;
+  --apex-live-fg: #15803d;
+  --apex-live-border: #86efac;
+  --apex-gap-bg: #fef3c7;
+  --apex-gap-fg: #92400e;
+  --apex-gap-border: #fde68a;
+  --apex-error-bg: #fee2e2;
+  --apex-error-fg: #b91c1c;
+  --apex-error-border: #fca5a5;
+  --apex-neutral-bg: #f1f5f9;
+  --apex-neutral-fg: #475569;
+  --apex-neutral-border: #e2e8f0;
+  --apex-layer-product: var(--apex-green);
+  --apex-layer-governance: var(--apex-amber);
+  --apex-layer-catalog: var(--apex-cyan);
+  --apex-layer-factory: var(--apex-pink);
+  --apex-layer-runtime: var(--apex-accent-2);
   --apex-font-sans: 'IBM Plex Sans', system-ui, sans-serif;
   --apex-font-display: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
   --apex-font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --apex-text-xs: 11px;
   --apex-text-sm: 12px;
   --apex-text-base: 13px;
   --apex-text-md: 14px;
   --apex-text-lg: 16px;
   --apex-text-xl: 20px;
   --apex-text-kpi: 28px;
+  --apex-text-hero: 36px;
+  --apex-sidebar-w: 14rem;
+  --apex-pane-w: 20rem;
+  --apex-topbar-h: 3rem;
   --apex-radius-sm: 6px;
   --apex-radius: 10px;
   --apex-radius-lg: 14px;
   --apex-shadow-accent: 0 6px 18px rgba(0, 32, 91, 0.18);
-  --apex-sidebar-w: 14rem;
-  --apex-topbar-h: 3rem;
+  --apex-bg-glow: none;
+}
+
+[data-apex-theme='console'] {
+  --apex-bg: #1c2128;
+  --apex-bg-2: #22272e;
+  --apex-elev: #313943;
+  --apex-panel: #22272e;
+  --apex-card: #2a313b;
+  --apex-sidebar: #22272e;
+  --apex-editor: #22272e;
+  --apex-text: #e6edf3;
+  --apex-text-strong: #f6f8fa;
+  --apex-muted: #adbac7;
+  --apex-faint: #909dab;
+  --apex-border: #3d444d;
+  --apex-border-strong: #545d68;
+  --apex-border-soft: rgba(255, 255, 255, 0.09);
+  --apex-accent: #6cb6ff;
+  --apex-on-accent: #1c2128;
+  --apex-accent-2: #96d0ff;
+  --apex-accent-soft: rgba(108, 182, 255, 0.14);
+  --apex-accent-ring: rgba(108, 182, 255, 0.4);
+  --apex-cyan: #56d4dd;
+  --apex-green: #6bc46d;
+  --apex-amber: #daaa3f;
+  --apex-red: #ff938a;
+  --apex-pink: #b083f0;
+  --apex-gold: #c5a059;
+  --apex-shadow-accent: 0 6px 18px rgba(46, 107, 255, 0.35);
+  --apex-bg-glow: radial-gradient(
+    1100px 560px at 78% -12%,
+    rgba(108, 182, 255, 0.08),
+    transparent 62%
+  );
+}
+
+[data-apex-theme='documental'] {
+  --apex-bg: #faf8f4;
+  --apex-bg-2: #fffefa;
+  --apex-elev: #ffffff;
+  --apex-panel: #fffefa;
+  --apex-card: #ffffff;
+  --apex-sidebar: #f3ecdd;
+  --apex-editor: #fffefa;
+  --apex-text: #1c1a17;
+  --apex-text-strong: #1c1a17;
+  --apex-muted: #716d65;
+  --apex-faint: #4a4640;
+  --apex-border: #dcd6ca;
+  --apex-border-strong: #cbc3b5;
+  --apex-border-soft: #e2ddd4;
+  --apex-accent: #8a6d3b;
+  --apex-on-accent: #ffffff;
+  --apex-accent-2: #a6854a;
+  --apex-accent-soft: #f3ecdd;
+  --apex-accent-ring: rgba(138, 109, 59, 0.35);
+  --apex-cyan: #2f5d7c;
+  --apex-green: #3d6b45;
+  --apex-amber: #8a6d1f;
+  --apex-red: #8f2f2f;
+  --apex-pink: #6b4f7a;
+  --apex-gold: #c5a059;
+  --apex-gold-soft: #faf5ea;
+  --apex-font-sans: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  --apex-font-display: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  --apex-font-mono: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
+  --apex-bg-glow: linear-gradient(
+      90deg,
+      transparent 0,
+      transparent calc(100% - 1px),
+      rgba(138, 109, 59, 0.08) calc(100% - 1px)
+    )
+    0 0 / 8.333% 100%;
+}
+
+/* Aliases legados do supplier_kit (pré-SSOT). Não usar em código novo.
+   `.apex-documental` foi substituído por `data-apex-theme="documental"`. */
+:root {
+  --apex-bg-primary: var(--apex-bg);
+  --apex-bg-surface: var(--apex-card);
+  --apex-text-primary: var(--apex-text);
+  --apex-text-secondary: var(--apex-muted);
+  --apex-text-muted: var(--apex-faint);
+  --apex-brand: var(--apex-accent);
+  --apex-brand-hover: var(--apex-accent-2);
+  --apex-brand-light: var(--apex-accent-soft);
+  --apex-status-live: var(--apex-green);
+  --apex-status-versioned: var(--apex-accent-2);
+  --apex-status-inference: var(--apex-amber);
+  --apex-status-gap: var(--apex-red);
+  --apex-status-blocked: var(--apex-faint);
 }
