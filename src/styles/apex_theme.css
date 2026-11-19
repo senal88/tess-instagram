@@ -1,0 +1,104 @@
+/* Tema Apex aplicado por cima do tema do app.
+   Escopo :root:not(.dark) para não sobrescrever o modo escuro existente. */
+@import './apex_tokens.css';
+
+:root:not(.dark) {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+  --primary: 219 100% 18%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 19% 35%;
+  --accent: 220 100% 97%;
+  --accent-foreground: 219 100% 18%;
+  --destructive: 0 74% 42%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 213 27% 84%;
+  --ring: 216 100% 40%;
+  --radius: 0.625rem;
+  --chart-1: 219 100% 18%;
+  --chart-2: 216 100% 40%;
+  --chart-3: 189 82% 31%;
+  --chart-4: 38 92% 45%;
+  --chart-5: 0 74% 42%;
+  --sidebar-background: 210 40% 96%;
+  --sidebar-foreground: 222 47% 11%;
+  --sidebar-primary: 219 100% 18%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 220 100% 97%;
+  --sidebar-accent-foreground: 219 100% 18%;
+  --sidebar-border: 214 32% 91%;
+  --sidebar-ring: 216 100% 40%;
+}
+
+/* Cores de marca avulsas (índigo) passam a usar o acento Apex. */
+:root:not(.dark) .bg-indigo-600,
+:root:not(.dark) .bg-indigo-500 {
+  background-color: hsl(var(--primary));
+}
+:root:not(.dark) .hover\:bg-indigo-700:hover,
+:root:not(.dark) .hover\:bg-indigo-600:hover {
+  background-color: hsl(var(--primary) / 0.9);
+}
+:root:not(.dark) .text-indigo-600,
+:root:not(.dark) .text-indigo-500 {
+  color: hsl(var(--primary));
+}
+
+body {
+  font-family:
+    'Inter',
+    'IBM Plex Sans',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-variant-numeric: tabular-nums;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: rgba(0, 82, 204, 0.16);
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.45);
+    background-clip: content-box;
+  }
+}

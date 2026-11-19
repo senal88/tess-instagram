@@ -1,0 +1,40 @@
+/* Tokens Apex (espelho compacto) — mesma paleta do padrão Tess. */
+:root,
+[data-apex-theme='apex-light'] {
+  --apex-bg: #f8fafc;
+  --apex-bg-2: #ffffff;
+  --apex-panel: #ffffff;
+  --apex-card: #ffffff;
+  --apex-sidebar: #f1f5f9;
+  --apex-text: #0f172a;
+  --apex-text-strong: #00205b;
+  --apex-muted: #475569;
+  --apex-faint: #64748b;
+  --apex-border: #e2e8f0;
+  --apex-border-strong: #cbd5e1;
+  --apex-accent: #00205b;
+  --apex-on-accent: #ffffff;
+  --apex-accent-2: #0052cc;
+  --apex-accent-soft: #eef4ff;
+  --apex-accent-ring: rgba(0, 82, 204, 0.35);
+  --apex-green: #15803d;
+  --apex-amber: #92400e;
+  --apex-red: #b91c1c;
+  --apex-cyan: #0e7490;
+  --apex-gold: #c5a059;
+  --apex-font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --apex-font-display: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+  --apex-font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --apex-text-sm: 12px;
+  --apex-text-base: 13px;
+  --apex-text-md: 14px;
+  --apex-text-lg: 16px;
+  --apex-text-xl: 20px;
+  --apex-text-kpi: 28px;
+  --apex-radius-sm: 6px;
+  --apex-radius: 10px;
+  --apex-radius-lg: 14px;
+  --apex-shadow-accent: 0 6px 18px rgba(0, 32, 91, 0.18);
+  --apex-sidebar-w: 14rem;
+  --apex-topbar-h: 3rem;
+}
