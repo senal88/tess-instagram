@@ -702,7 +702,7 @@ export default function Conexao() {
                   Configuração do Copiloto de IA
                 </h2>
                 <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200">
-                  Agente Nativo Skip Cloud
+                  Agente Nativo TESS IA
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">

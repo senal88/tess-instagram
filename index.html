@@ -1,18 +1,28 @@
 <!-- HTML template for the frontend react app: https://developer.mozilla.org/en-US/docs/Web/HTML --><!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Um incrível projeto do Skip</title>
+    <title>Atendimento Instagram · TESS</title>
     <meta name="description" content="Tess Atendimento Instagram" />
-    <meta name="author" content="Skip (https://goskip.dev)" />
-    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image" content="/brand/og-tess.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/brand/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/favicon-180.png" />
+      <meta name="theme-color" content="#202020" />
+      <meta property="og:title" content="Atendimento Instagram · TESS" />
+      <meta property="og:description" content="Tess Atendimento Instagram" />
+      <meta property="og:type" content="website" />
   </head>
 
   <body>
     <div id="root"></div>
     <!-- @skip-protected: Do not remove. Required for app features. -->
-    <script src="https://goskip.dev/skip.js"></script>
+        <script>
+      if (window.self !== window.top || location.hostname.includes('--preview')) {
+        document.write('<script src="https://goskip.dev/skip.js"><\/script>') // whitelabel-ok: guard so no Builder e preview
+      }
+    </script>
     <!-- @skip-protected: Do not remove. App entrypoint. -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
