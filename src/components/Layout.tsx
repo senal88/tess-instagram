@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Navigate, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Inbox, Instagram, Link as LinkIcon, LogOut, Menu, Settings, X } from 'lucide-react'
 import { podeAcessarInbox, useAuth } from '@/contexts/AuthContext'
+import { BrandHeader } from './brand/BrandHeader'
+import { BrandBadge } from './brand/BrandBadge'
 
 export default function Layout() {
   const { usuario, carregando, logout } = useAuth()
@@ -36,11 +38,9 @@ export default function Layout() {
   const navContent = (
     <>
       <div className="sidebar-brand">
-        <div className="sidebar-logo">
-          <Instagram size={22} />
-        </div>
+        <BrandHeader variant="dark" className="flex items-center shrink-0" />
         <div>
-          <strong>Central de</strong>
+          <strong>Instagram</strong>
           <span>Atendimento</span>
         </div>
       </div>
@@ -90,6 +90,9 @@ export default function Layout() {
           <LogOut size={17} />
           <span>Sair</span>
         </button>
+        <div className="pt-2 flex justify-end">
+          <BrandBadge variant="dark" className="opacity-80 hover:opacity-100 transition-opacity" />
+        </div>
       </div>
     </>
   )
