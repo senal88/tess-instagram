@@ -5,8 +5,17 @@ type Props = { variant?: 'light' | 'dark'; className?: string }
 
 export function BrandHeader({ variant = 'dark', className }: Props) {
   return (
-    <a data-brand="header" href={brand.header.href} aria-label={`${brand.name} — início`} className={className}>
-      <img src={variant === 'light' ? brand.header.light : brand.header.dark} alt={brand.name} height={28} />
+    <a
+      data-brand="header"
+      href={brand.header.href}
+      aria-label={`${brand.name} — início`}
+      className={className}
+    >
+      <img
+        src={variant === 'light' ? brand.header.light : brand.header.dark}
+        alt={brand.name}
+        height={28}
+      />
     </a>
   )
 }

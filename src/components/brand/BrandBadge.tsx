@@ -13,7 +13,11 @@ export function BrandBadge({ variant = 'dark', className }: Props) {
       aria-label={brand.badge.alt}
       className={className}
     >
-      <img src={variant === 'light' ? brand.badge.light : brand.badge.dark} alt={brand.name} height={20} />
+      <img
+        src={variant === 'light' ? brand.badge.light : brand.badge.dark}
+        alt={brand.name}
+        height={20}
+      />
     </a>
   )
 }
